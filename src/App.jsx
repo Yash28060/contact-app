@@ -1,10 +1,11 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import { openDB } from "idb";
-import Header from "./Header";
-import ContactList from "./ContactList";
-import AddContact from "./AddContact";
+import Header from "./components/Header";
+import ContactList from "./components/ContactList";
+import AddContact from "./components/AddContact";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import About from "./components/About";
 
 const Local_Storage_Key = "contacts";
 
@@ -81,12 +82,11 @@ function App() {
                   deleteContactHandler={deleteContactHandler}
                 />}
             />
+            <Route
+              path="/about"
+              element={<About/>}
+            />
           </Routes>
-          {/* <AddContact addContactHandler={addContactHandler} /> */}
-          {/* <ContactList
-          contacts={contacts}
-          deleteContactHandler={deleteContactHandler}
-        /> */}
         </Router>
       </div>
     </>

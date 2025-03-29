@@ -7,34 +7,49 @@ function ContactCard({ contact, deleteContact }) {
     <>
       <div
         key={id}
-        className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300"
+        className="bg-white hover:border-blue-500 hover:ring-1 hover:ring-blue-400 outline-none rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300"
       >
         <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center space-x-3">
-          {avatar ? (
-          <img
-            src={avatar}
-            alt={name}
-            className="w-16 h-16 rounded-full object-cover mr-4"
-          />
-        ) : (
-          <div className="w-16 h-16 rounded-full bg-gray-300 flex items-center justify-center mr-4">
-            <span className="text-gray-600 text-lg font-semibold">
-              {contact.name[0]}
-            </span>
-          </div>
-        )}
-
-            <div>
-              <h4 className="text-lg font-semibold text-gray-800">
+          <div className="flex items-center space-x-3 min-w-0">
+            {avatar ? (
+              <img
+                src={avatar}
+                alt={name}
+                className="w-16 h-16 rounded-full object-cover mr-4 flex-shrink-0"
+              />
+            ) : (
+              <div className="w-16 h-16 rounded-full bg-gray-300 flex items-center justify-center mr-4 flex-shrink-0">
+                <span className="text-gray-600 text-lg font-semibold">
+                  {contact.name[0]}
+                </span>
+              </div>
+            )}
+            <div className="min-w-0">
+              <h4 className="text-lg font-semibold text-gray-800 truncate">
                 {name}
               </h4>
-              <p className="text-gray-600">{email}</p>
+              <p className="text-gray-600 flex items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 mr-2 text-blue-500 flex-shrink-0"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  />
+                </svg>
+                <span className="truncate">{number}</span>
+              </p>
             </div>
           </div>
           <button
             onClick={() => deleteContact(contact.id)}
-            className="text-red-500 hover:text-red-700 transition-colors duration-200"
+            className="text-red-500 hover:text-red-700 transition-all duration-200 flex-shrink-0 hover:shadow-lg rounded-full p-1 cursor-pointer"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +71,7 @@ function ContactCard({ contact, deleteContact }) {
           <p className="text-gray-600 flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 mr-2 text-blue-500"
+              className="h-5 w-5 mr-2 text-blue-500 flex-shrink-0"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -65,15 +80,15 @@ function ContactCard({ contact, deleteContact }) {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
               />
             </svg>
-            {number}
+            <span className="truncate">{email}</span>
           </p>
           <p className="text-gray-600 flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 mr-2 text-blue-500"
+              className="h-5 w-5 mr-2 text-blue-500 flex-shrink-0"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -91,7 +106,7 @@ function ContactCard({ contact, deleteContact }) {
                 d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
               />
             </svg>
-            {address}
+            <span className="truncate">{address}</span>
           </p>
         </div>
       </div>

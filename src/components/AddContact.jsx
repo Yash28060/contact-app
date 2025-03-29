@@ -1,5 +1,6 @@
 import React from "react";
 import { openDB } from "idb";
+import { useNavigate } from "react-router-dom";
 
 class AddContact extends React.Component {
   state = {
@@ -11,7 +12,24 @@ class AddContact extends React.Component {
     previewUrl: null, // Image preview before saving
   };
 
+  // Character limits
+  limits = {
+    name: 50,
+    email: 75,
+    address: 100,
+    number: 10,
+  };
+
   fileInputRef = React.createRef(); // Reference for file input
+
+  handleInputChange = (e, field) => {
+    const value = e.target.value;
+    const limit = this.limits[field];
+
+    if (value.length <= limit) {
+      this.setState({ [field]: value });
+    }
+  };
 
   async saveImageToDB(file, contactId) {
     const db = await openDB("contacts-db", 1, {
@@ -74,11 +92,14 @@ class AddContact extends React.Component {
     if (this.fileInputRef.current) {
       this.fileInputRef.current.value = "";
     }
+
+    // Navigate to home page after adding contact
+    this.props.navigate("/");
   };
 
   render() {
     return (
-      <div className="ui main flex items-center justify-center flex-col py-10">
+      <div className="flex items-center  flex-col py-10 min-h-screen">
         <form
           className="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6 border border-gray-200 hover:border-blue-500 hover:ring-1 hover:ring-blue-400 outline-none"
           onSubmit={this.add}
@@ -92,14 +113,18 @@ class AddContact extends React.Component {
             <div className="flex flex-col col-span-2">
               <label htmlFor="name" className="text-gray-700 font-medium">
                 Name<span className="text-red-500">*</span>
+                <span className="text-sm text-gray-500 ml-2">
+                  ({this.state.name.length}/{this.limits.name} characters)
+                </span>
               </label>
               <input
                 type="text"
                 id="name"
                 placeholder="Enter Name"
                 value={this.state.name}
-                onChange={(e) => this.setState({ name: e.target.value })}
-                className="border border-gray-300 rounded-md p-3 mt-1 hover:border-blue-500 hover:ring-1 hover:ring-blue-400 outline-none"
+                onChange={(e) => this.handleInputChange(e, "name")}
+                maxLength={this.limits.name}
+                className="border border-gray-300 rounded-md p-3 mt-1 hover:border-blue-500 hover:ring-1 hover:ring-blue-400 outline-none break-words"
               />
             </div>
 
@@ -107,13 +132,17 @@ class AddContact extends React.Component {
             <div className="flex flex-col grid-cols-2">
               <label htmlFor="number" className="text-gray-700 font-medium">
                 Phone No.<span className="text-red-500">*</span>
+                <span className="text-sm text-gray-500 ml-2">
+                  ({this.state.number.length}/{this.limits.number} characters)
+                </span>
               </label>
               <input
                 type="tel"
                 id="number"
                 placeholder="Enter Phone No."
                 value={this.state.number}
-                onChange={(e) => this.setState({ number: e.target.value })}
+                onChange={(e) => this.handleInputChange(e, "number")}
+                maxLength={this.limits.number}
                 className="border border-gray-300 rounded-md p-3 mt-1 outline-none hover:border-blue-500 hover:ring-1 hover:ring-blue-400"
               />
             </div>
@@ -122,14 +151,18 @@ class AddContact extends React.Component {
             <div className="flex flex-col grid-cols-2">
               <label htmlFor="email" className="text-gray-700 font-medium">
                 Email<span className="text-red-500">*</span>
+                <span className="text-sm text-gray-500 ml-2">
+                  ({this.state.email.length}/{this.limits.email} characters)
+                </span>
               </label>
               <input
                 type="email"
                 id="email"
                 placeholder="Enter Email"
                 value={this.state.email}
-                onChange={(e) => this.setState({ email: e.target.value })}
-                className="border border-gray-300 rounded-md p-3 mt-1 hover:border-blue-500 hover:ring-1 hover:ring-blue-400 outline-none"
+                onChange={(e) => this.handleInputChange(e, "email")}
+                maxLength={this.limits.email}
+                className="border border-gray-300 rounded-md p-3 mt-1 hover:border-blue-500 hover:ring-1 hover:ring-blue-400 outline-none break-words"
               />
             </div>
 
@@ -137,14 +170,18 @@ class AddContact extends React.Component {
             <div className="flex flex-col col-span-2">
               <label htmlFor="address" className="text-gray-700 font-medium">
                 Address<span className="text-red-500">*</span>
+                <span className="text-sm text-gray-500 ml-2">
+                  ({this.state.address.length}/{this.limits.address} characters)
+                </span>
               </label>
-              <input
-                type="text"
+              <textarea
                 id="address"
                 placeholder="Enter Address"
                 value={this.state.address}
-                onChange={(e) => this.setState({ address: e.target.value })}
-                className="border border-gray-300 rounded-md p-3 mt-1 hover:border-blue-500 hover:ring-1 hover:ring-blue-400 outline-none"
+                onChange={(e) => this.handleInputChange(e, "address")}
+                maxLength={this.limits.address}
+                rows="3"
+                className="border border-gray-300 rounded-md p-3 mt-1 hover:border-blue-500 hover:ring-1 hover:ring-blue-400 outline-none resize-none break-words"
               />
             </div>
 
@@ -191,4 +228,10 @@ class AddContact extends React.Component {
   }
 }
 
-export default AddContact;
+// Wrapper component to use useNavigate hook
+const AddContactWrapper = (props) => {
+  const navigate = useNavigate();
+  return <AddContact {...props} navigate={navigate} />;
+};
+
+export default AddContactWrapper;
