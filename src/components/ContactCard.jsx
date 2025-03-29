@@ -2,7 +2,7 @@ import React from "react";
 // import defaultUser from "/images/1.jpg";
 
 function ContactCard({ contact, deleteContact }) {
-  const { id, name, email, mobile, address, avatar } = contact;
+  const { id, name, email, number, address, avatar } = contact;
   return (
     <>
       <div
@@ -11,14 +11,6 @@ function ContactCard({ contact, deleteContact }) {
       >
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-3">
-            {/* <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
-              {name.charAt(0).toUpperCase()}
-            </div> */}
-           {/* <img  
-            src={avatar || defaultUser} 
-            alt={name} 
-            className="w-12 h-12 rounded-full object-cover" 
-          /> */}
           {avatar ? (
           <img
             src={avatar}
@@ -41,7 +33,7 @@ function ContactCard({ contact, deleteContact }) {
             </div>
           </div>
           <button
-            onClick={() => deleteContact(id)}
+            onClick={() => deleteContact(contact.id)}
             className="text-red-500 hover:text-red-700 transition-colors duration-200"
           >
             <svg
@@ -76,7 +68,7 @@ function ContactCard({ contact, deleteContact }) {
                 d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
               />
             </svg>
-            {mobile}
+            {number}
           </p>
           <p className="text-gray-600 flex items-center">
             <svg

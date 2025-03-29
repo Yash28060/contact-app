@@ -5,7 +5,7 @@ class AddContact extends React.Component {
   state = {
     name: "",
     email: "",
-    mobile: "",
+    number: "",
     address: "",
     avatar: null, // Store file object
     previewUrl: null, // Image preview before saving
@@ -33,7 +33,12 @@ class AddContact extends React.Component {
 
   add = async (e) => {
     e.preventDefault();
-    if (!this.state.name || !this.state.email || !this.state.mobile || !this.state.address) {
+    if (
+      !this.state.name ||
+      !this.state.email ||
+      !this.state.number ||
+      !this.state.address
+    ) {
       alert("All fields with * are mandatory!");
       return;
     }
@@ -49,7 +54,7 @@ class AddContact extends React.Component {
       id: contactId,
       name: this.state.name,
       email: this.state.email,
-      mobile: this.state.mobile,
+      number: this.state.number,
       address: this.state.address,
       avatar: imageUrl, // Store base64 data
     };
@@ -60,7 +65,7 @@ class AddContact extends React.Component {
     this.setState({
       name: "",
       email: "",
-      mobile: "",
+      number: "",
       address: "",
       avatar: null,
       previewUrl: null,
@@ -100,15 +105,15 @@ class AddContact extends React.Component {
 
             {/* Mobile */}
             <div className="flex flex-col grid-cols-2">
-              <label htmlFor="mobile" className="text-gray-700 font-medium">
-                Mobile No.<span className="text-red-500">*</span>
+              <label htmlFor="number" className="text-gray-700 font-medium">
+                Phone No.<span className="text-red-500">*</span>
               </label>
               <input
                 type="tel"
-                id="mobile"
-                placeholder="Enter Mobile No."
-                value={this.state.mobile}
-                onChange={(e) => this.setState({ mobile: e.target.value })}
+                id="number"
+                placeholder="Enter Phone No."
+                value={this.state.number}
+                onChange={(e) => this.setState({ number: e.target.value })}
                 className="border border-gray-300 rounded-md p-3 mt-1 outline-none hover:border-blue-500 hover:ring-1 hover:ring-blue-400"
               />
             </div>
