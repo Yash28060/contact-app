@@ -1,22 +1,27 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import React, { useEffect, useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { theme, setTheme } = useContext(ThemeContext); // Accessing theme context
 
   const isActive = (path) => location.pathname === path;
-  const [darkMode, setDarkMode] = useState(false);
-
+  // const [darkMode, setDarkMode] = useState(false);
+  useEffect(() => {
+    console.log("theme", theme);
+  }, []);
   return (
-    <header className="bg-gradient-to-r from-[#6a11cb] to-[#2575fc] text-white p-4 shadow-lg ">
+    <header className="bg-gradient-to-r from-[#6a11cb] to-[#2575fc] text-white p-4 shadow-lg">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-2 z-15 left-4">
+        <Link to="/" className="flex items-center space-x-2">
           <img
             src="https://images.unsplash.com/photo-1611606063065-ee7946f0787a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Logo"
-            className="h-8 w-auto rounded-full"
+            className="h-8 w-auto rounded-full z-55"
           />
           <span className="text-xl font-bold">Contact App</span>
         </Link>
@@ -61,7 +66,7 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex md:items-center md:gap-6">
-          <ul className="flex flex-col md:flex-row md:gap-8 p-4 md:p-0">
+          <ul className="flex flex-col md:flex-row md:gap-8">
             <li>
               <Link
                 to="/"
@@ -103,7 +108,7 @@ const Header = () => {
 
         {/* Fullscreen Mobile Navigation */}
         {isOpen && (
-          <nav className="fixed top-0 left-0 w-full h-full bg-gradient-to-r from-[#7f3dc6] to-[#2575fc] flex flex-col items-center justify-center z-10 opacity-100">
+          <nav className="fixed top-0 left-0 w-full h-full bg-gradient-to-r from-[#7f3dc6] to-[#2575fc] flex flex-col items-center justify-center z-10">
             <button
               className="absolute top-5 right-5 text-white text-3xl"
               onClick={() => setIsOpen(false)}
@@ -141,37 +146,25 @@ const Header = () => {
             </ul>
           </nav>
         )}
-        <button onClick={() => setDarkMode(!darkMode)} className="p-2">
-          {darkMode ? (
-            // Moon icon (for dark mode)
-            <svg
-              height="24"
-              width="24"
-              viewBox="0 0 56 56"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="white" // Default color set to white
-            >
-              <path
-                d="M29,28c0-11.917,7.486-22.112,18-26.147C43.892,0.66,40.523,0,37,0C21.561,0,9,12.561,9,28s12.561,28,28,28
-          c3.523,0,6.892-0.66,10-1.853C36.486,50.112,29,39.917,29,28z"
-              />
-            </svg>
-          ) : (
-            // Sun icon (for light mode)
+
+        {/* Dark Mode Toggle */}
+        <button className="p-2 ">
+          {theme == "dark" ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="w-7 h-7"
-              fill="none"
+              className="w-10 h-10 cursor-pointer p-2 bg-white rounded-full"
+              fill="black"
               viewBox="0 0 24 24"
-              stroke="currentColor"
+              stroke="black"
+              onClick={() => setTheme("light")}
             >
               <circle
                 cx="12"
                 cy="12"
                 r="5"
                 strokeWidth="2"
-                stroke="currentColor"
-                fill="none"
+                stroke="black"
+                fill="black"
               />
               <line
                 x1="12"
@@ -179,7 +172,7 @@ const Header = () => {
                 x2="12"
                 y2="5"
                 strokeWidth="2"
-                stroke="currentColor"
+                stroke="black"
               />
               <line
                 x1="12"
@@ -187,7 +180,7 @@ const Header = () => {
                 x2="12"
                 y2="22"
                 strokeWidth="2"
-                stroke="currentColor"
+                stroke="black"
               />
               <line
                 x1="2"
@@ -195,7 +188,7 @@ const Header = () => {
                 x2="5"
                 y2="12"
                 strokeWidth="2"
-                stroke="currentColor"
+                stroke="black"
               />
               <line
                 x1="19"
@@ -203,7 +196,7 @@ const Header = () => {
                 x2="22"
                 y2="12"
                 strokeWidth="2"
-                stroke="currentColor"
+                stroke="black"
               />
               <line
                 x1="4.2"
@@ -211,7 +204,7 @@ const Header = () => {
                 x2="6.4"
                 y2="6.4"
                 strokeWidth="2"
-                stroke="currentColor"
+                stroke="black"
               />
               <line
                 x1="17.6"
@@ -219,7 +212,7 @@ const Header = () => {
                 x2="19.8"
                 y2="19.8"
                 strokeWidth="2"
-                stroke="currentColor"
+                stroke="black"
               />
               <line
                 x1="4.2"
@@ -227,7 +220,7 @@ const Header = () => {
                 x2="6.4"
                 y2="17.6"
                 strokeWidth="2"
-                stroke="currentColor"
+                stroke="black"
               />
               <line
                 x1="17.6"
@@ -235,7 +228,25 @@ const Header = () => {
                 x2="19.8"
                 y2="4.2"
                 strokeWidth="2"
-                stroke="currentColor"
+                stroke="black"
+              />
+            </svg>
+          ) : (
+            <svg
+              height="24"
+              width="24"
+              viewBox="0 0 56 56"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="dark"
+              className="w-10 h-10 cursor-pointer p-2 bg-white rounded-full"
+              onClick={() => {
+                setTheme("dark");
+                localStorage.setItem("theme", "dark");
+              }}
+            >
+              <path
+                d="M29,28c0-11.917,7.486-22.112,18-26.147C43.892,0.66,40.523,0,37,0C21.561,0,9,12.561,9,28s12.561,28,28,28
+          c3.523,0,6.892-0.66,10-1.853C36.486,50.112,29,39.917,29,28z"
               />
             </svg>
           )}

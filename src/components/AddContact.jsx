@@ -99,9 +99,9 @@ class AddContact extends React.Component {
 
   render() {
     return (
-      <div className="flex items-center  flex-col py-10 min-h-screen">
+      <div className="flex items-center flex-col py-10 ">
         <form
-          className="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6 border border-gray-200 hover:border-blue-500 hover:ring-1 hover:ring-blue-400 outline-none"
+          className="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6 border border-gray-200 hover:border-blue-500 hover:ring-2 hover:ring-blue-400 outline-none duration-300"
           onSubmit={this.add}
         >
           <h2 className="text-2xl font-semibold text-center text-blue-700 mb-6">

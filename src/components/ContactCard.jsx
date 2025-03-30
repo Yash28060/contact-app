@@ -7,7 +7,7 @@ function ContactCard({ contact, deleteContact }) {
     <>
       <div
         key={id}
-        className="bg-white hover:border-blue-500 hover:ring-1 hover:ring-blue-400 outline-none rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300"
+        className="bg-white hover:border-blue-500 hover:ring-3 hover:ring-blue-400 outline-none rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300"
       >
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-3 min-w-0">

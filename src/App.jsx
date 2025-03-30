@@ -6,12 +6,13 @@ import ContactList from "./components/ContactList";
 import AddContact from "./components/AddContact";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import About from "./components/About";
+import { ThemeContext } from "./context/ThemeContext";
 
 const Local_Storage_Key = "contacts";
 
 function App() {
   const [contacts, setContacts] = useState([]);
-
+  const [theme, setTheme] = useState("dark"); //setting theme
   // Open IndexedDB database
   const initDB = async () => {
     return openDB("ContactsDB", 1, {
@@ -57,6 +58,11 @@ function App() {
     await store.delete(id);
     await tx.done;
   };
+   useEffect(() => {
+    setTheme(
+      localStorage.getItem("theme") ? localStorage.setItem("theme","light") : "dark"
+    );
+  }, []);
 
   // Load contacts from IndexedDB on app start
   useEffect(() => {
@@ -65,7 +71,14 @@ function App() {
 
   return (
     <>
-      <div>
+      <ThemeContext.Provider value={{ theme, setTheme }}>
+        <div
+          className={`${theme} ${
+            theme == "dark"
+              ? "bg-gradient-to-b from-black via-gray-800 to-gray-900"
+              : null
+          } min-h-screen h-full`}
+        >
         <Router>
           <Header />
           <Routes>
@@ -89,6 +102,7 @@ function App() {
           </Routes>
         </Router>
       </div>
+      </ThemeContext.Provider>
     </>
   );
 }

@@ -1,13 +1,17 @@
-
+import React, { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 
 const About = () => {
+  const { theme } = useContext(ThemeContext); // Access the current theme
 
   return (
-    <div className="h-full mt-15 max-w-2xl m-auto p-6 bg-gray-800 rounded-lg shadow-lg ">
-      <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
-        About Contact App
-      </h1>
-      <div className="space-y-4 text-gray-700 dark:text-gray-300">
+    <div
+      className={`h-fit mt-15 max-w-2xl m-auto p-6 rounded-lg shadow-lg ${
+        theme === "dark" ? "bg-white text-gray-900" : "bg-gray-900 text-white"
+      }`}
+    >
+      <h1 className="text-3xl font-bold mb-6">About Contact App</h1>
+      <div className="space-y-4">
         <p>
           Welcome to our Contact Management Application! This app helps you
           organize and manage your contacts efficiently.
