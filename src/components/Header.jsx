@@ -6,6 +6,7 @@ const Header = () => {
   const location = useLocation();
 
   const isActive = (path) => location.pathname === path;
+  const [darkMode, setDarkMode] = useState(false);
 
   return (
     <header className="bg-gradient-to-r from-[#6a11cb] to-[#2575fc] text-white p-4 shadow-lg ">
@@ -140,6 +141,105 @@ const Header = () => {
             </ul>
           </nav>
         )}
+        <button onClick={() => setDarkMode(!darkMode)} className="p-2">
+          {darkMode ? (
+            // Moon icon (for dark mode)
+            <svg
+              height="24"
+              width="24"
+              viewBox="0 0 56 56"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="white" // Default color set to white
+            >
+              <path
+                d="M29,28c0-11.917,7.486-22.112,18-26.147C43.892,0.66,40.523,0,37,0C21.561,0,9,12.561,9,28s12.561,28,28,28
+          c3.523,0,6.892-0.66,10-1.853C36.486,50.112,29,39.917,29,28z"
+              />
+            </svg>
+          ) : (
+            // Sun icon (for light mode)
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-7 h-7"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="5"
+                strokeWidth="2"
+                stroke="currentColor"
+                fill="none"
+              />
+              <line
+                x1="12"
+                y1="2"
+                x2="12"
+                y2="5"
+                strokeWidth="2"
+                stroke="currentColor"
+              />
+              <line
+                x1="12"
+                y1="19"
+                x2="12"
+                y2="22"
+                strokeWidth="2"
+                stroke="currentColor"
+              />
+              <line
+                x1="2"
+                y1="12"
+                x2="5"
+                y2="12"
+                strokeWidth="2"
+                stroke="currentColor"
+              />
+              <line
+                x1="19"
+                y1="12"
+                x2="22"
+                y2="12"
+                strokeWidth="2"
+                stroke="currentColor"
+              />
+              <line
+                x1="4.2"
+                y1="4.2"
+                x2="6.4"
+                y2="6.4"
+                strokeWidth="2"
+                stroke="currentColor"
+              />
+              <line
+                x1="17.6"
+                y1="17.6"
+                x2="19.8"
+                y2="19.8"
+                strokeWidth="2"
+                stroke="currentColor"
+              />
+              <line
+                x1="4.2"
+                y1="19.8"
+                x2="6.4"
+                y2="17.6"
+                strokeWidth="2"
+                stroke="currentColor"
+              />
+              <line
+                x1="17.6"
+                y1="6.4"
+                x2="19.8"
+                y2="4.2"
+                strokeWidth="2"
+                stroke="currentColor"
+              />
+            </svg>
+          )}
+        </button>
       </div>
     </header>
   );
