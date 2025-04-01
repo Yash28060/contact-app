@@ -129,7 +129,7 @@ class AddContact extends React.Component {
             </div>
 
             {/* Mobile */}
-            <div className="flex flex-col grid-cols-2">
+            <div className="flex flex-col md:col-span-1 col-span-2 ">
               <label htmlFor="number" className="text-gray-700 font-medium">
                 Phone No.<span className="text-red-500">*</span>
                 <span className="text-sm text-gray-500 ml-2">
@@ -148,7 +148,7 @@ class AddContact extends React.Component {
             </div>
 
             {/* Email */}
-            <div className="flex flex-col grid-cols-2">
+            <div className="flex flex-col md:col-span-1 col-span-2">
               <label htmlFor="email" className="text-gray-700 font-medium">
                 Email<span className="text-red-500">*</span>
                 <span className="text-sm text-gray-500 ml-2">

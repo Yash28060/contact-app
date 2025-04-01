@@ -4,9 +4,11 @@ import { openDB } from "idb";
 import Header from "./components/Header";
 import ContactList from "./components/ContactList";
 import AddContact from "./components/AddContact";
+import ContactDetail from "./components/ContactDetail";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import About from "./components/About";
 import { ThemeContext } from "./context/ThemeContext";
+import Footer from "./components/Footer";
 
 const Local_Storage_Key = "contacts";
 
@@ -68,40 +70,40 @@ function App() {
   useEffect(() => {
     loadFromIndexedDB().then((data) => setContacts(data));
   }, []);
-
+  
   return (
     <>
       <ThemeContext.Provider value={{ theme, setTheme }}>
         <div
           className={`${theme} ${
-            theme == "dark"
+            theme === "dark"
               ? "bg-gradient-to-b from-black via-gray-800 to-gray-900"
-              : null
+              : ""
           } min-h-screen h-full`}
         >
-        <Router>
-          <Header />
-          <Routes>
-            <Route
-              path="/add"
-              element={<AddContact addContactHandler={addContactHandler} />}
-            />
-            <Route
-              path="/"
-              exact
-              element={
-                <ContactList
-                  contacts={contacts}
-                  deleteContactHandler={deleteContactHandler}
-                />}
-            />
-            <Route
-              path="/about"
-              element={<About/>}
-            />
-          </Routes>
-        </Router>
-      </div>
+          <Router>
+            <Header />
+            <Routes>
+              <Route
+                path="/add"
+                element={<AddContact addContactHandler={addContactHandler} />}
+              />
+              <Route
+                path="/"
+                exact
+                element={
+                  <ContactList
+                    contacts={contacts}
+                    deleteContactHandler={deleteContactHandler}
+                  />
+                }
+              />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact/:id" element={<ContactDetail />} />
+            </Routes>
+            <Footer />
+          </Router>
+        </div>
       </ThemeContext.Provider>
     </>
   );

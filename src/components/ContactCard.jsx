@@ -1,13 +1,17 @@
 import React from "react";
+// import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import defaultUser from "/images/1.jpg";
 
 function ContactCard({ contact, deleteContact }) {
   const { id, name, email, number, address, avatar } = contact;
+  const navigate = useNavigate(); 
   return (
     <>
       <div
         key={id}
-        className="bg-white hover:border-blue-500 hover:ring-3 hover:ring-blue-400 outline-none rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300"
+        onClick={() => navigate(`/contact/${id}`, { state: { contact } })}
+        className="bg-white hover:border-blue-500 hover:ring-3 hover:ring-blue-400 outline-none rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 cursor-pointer"
       >
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-3 min-w-0">
@@ -48,7 +52,12 @@ function ContactCard({ contact, deleteContact }) {
             </div>
           </div>
           <button
-            onClick={() => deleteContact(contact.id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (window.confirm("Are you sure you want to delete this contact?")) {
+                deleteContact(contact.id);
+              }
+            }}
             className="text-red-500 hover:text-red-700 transition-all duration-200 flex-shrink-0 hover:shadow-lg rounded-full p-1 cursor-pointer"
           >
             <svg
