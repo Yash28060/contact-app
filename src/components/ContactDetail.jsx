@@ -12,13 +12,26 @@ function ContactDetail() {
 
   return (
     <div className="flex flex-col justify-center mb-10 mt-10 items-center">
-      <div className="ui border-2 border-cyan-400 shadow-lg rounded-lg p-6 bg-white flex flex-col items-center w-fit">
-        <div className="img rounded-full mb-4">
-          <img
-            className="h-50 w-50 object-cover mr-4 flex-shrink-0 border-2 border-cyan-400 rounded-md"
+      <div className="ui border-2 border-blue-500 hover:ring-1 ring-blue-400 outline-none shadow-lg rounded-lg p-6 bg-white flex flex-col items-center w-fit">
+        <div className="img rounded-full  mb-4">
+          {/* <img
+            className="h-50 w-50 hover:scale-110 object-cover mr-4 flex-shrink-0  rounded-md"
             src={contact.avatar || "/images/1.jpg"}
             alt={contact.name}
-          />
+          /> */}
+          {contact.avatar ? (
+            <img
+              src={contact.avatar}
+              alt={contact.name}
+              className="h-50 w-50 hover:scale-110 object-cover mr-4 flex-shrink-0  rounded-md"
+            />
+          ) : (
+            <div className="h-50 w-50 hover:scale-110 object-cover mr-4 flex-shrink-0 bg-gray-300 flex items-center justify-center rounded-md">
+              <span className="text-gray-600 text-lg font-semibold">
+                {contact.name[0].toUpperCase()}
+              </span>
+            </div>
+          )}
         </div>
         <div className="content">
           <div className="header font-serif">{contact.name}</div>
