@@ -49,6 +49,7 @@ function ContactCard({ contact, deleteContact }) {
               </p>
             </div>
           </div>
+           <div className="flex justify-content-around items-center space-x-1">
           {/* Edit Button */}
           <button
             onClick={(e) => {
@@ -99,6 +100,7 @@ function ContactCard({ contact, deleteContact }) {
               />
             </svg>
           </button>
+             </div>
         </div>
         <div className="space-y-2">
           <p className="text-gray-600 flex items-center">
