@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const ContactList = ({ contacts, deleteContactHandler }) => {
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-2 ">
       <div className="flex justify-between items-center mb-8">
         <h3 className="text-2xl font-medium">Contact List</h3>
         <Link to="/add">

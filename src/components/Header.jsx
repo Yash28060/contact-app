@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 
 const Header = () => {
@@ -9,12 +9,9 @@ const Header = () => {
   const { theme, setTheme } = useContext(ThemeContext); // Accessing theme context
 
   const isActive = (path) => location.pathname === path;
-  // const [darkMode, setDarkMode] = useState(false);
-  useEffect(() => {
-    console.log("theme", theme);
-  }, []);
+
   return (
-    <header className="bg-gradient-to-r from-[#6a11cb] to-[#2575fc] text-white p-4 shadow-lg">
+    <header className="bg-gradient-to-r from-[#6a11cb] to-[#2575fc] text-white p-1 shadow-lg">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2">
